@@ -1,5 +1,13 @@
 # slack-app
 
+TOC
+- [pre-work](#pre-work)
+- [pre-commit](#pre-commit)
+- [github workflows](github-workflows)
+- [development](#development)
+- [test](#test)
+- [reference](#reference)
+
 ## pre-work
 
 on CodeAnywhere:
@@ -19,12 +27,25 @@ pyenv virtualenv 3.9.14 slack-app-venv
 pyenv activate slack-app-venv
 ```
 
+## pre-commit
+
+TBA
+
+## github workflows
+
+TBA
+
 ## development
 
-...
+TBA
 
-## reference/links
+## test
+
+TBA
+
+## reference
 
 - [PyPI - slack-sdk](https://pypi.org/project/slack-sdk/)
+- [GitHub - Slack Developer Kit for Python](https://github.com/slackapi/python-slack-sdk)
 - [Slack - api](https://api.slack.com/)
 - [Slack - Block Kit Builder](https://app.slack.com/block-kit-builder)
