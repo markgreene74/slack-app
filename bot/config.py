@@ -11,8 +11,8 @@ ch.setLevel(log_level)
 ch.setFormatter(log_formatter)
 
 # slack tokens
-SLK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN")
-SLK_APP_TOKEN = os.environ["SLACK_APP_TOKEN"]
+SLK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN", default="*****")
+SLK_APP_TOKEN = os.environ.get("SLACK_APP_TOKEN", default="*****")
 
 # log some useful info
 logger = logging.getLogger(__name__)

@@ -26,4 +26,4 @@ def message_hello(message, say):
 @app.message(pattern_fo76)
 def message_fo76(message, say):
     logger.info(f"FO76 requested by user: {message['user']}")
-    say(f"FO76 silo codes:\n{fo76.main()}")
+    say(f"FO76 silo codes:\n{fo76.get_codes()}")

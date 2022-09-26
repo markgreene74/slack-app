@@ -3,7 +3,13 @@ import logging
 import os
 import re
 import requests
-import bot.config as cfg
+
+# needed to run fo76 standalone/manually
+# ugly, but it works
+try:
+    import bot.config as cfg
+except ModuleNotFoundError:
+    import config as cfg
 
 FILENAME = "fo76"
 DIRNAME = os.path.join("bot", ".tmp_data")
@@ -28,7 +34,7 @@ def _needs_updating():
     return True if days_old >= 7 else False
 
 
-def _get_update():
+def _get_updates():
     logger.debug("Fetching data")
 
     ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
@@ -58,13 +64,18 @@ def _get_update():
     return file_content
 
 
-def main():
+def get_codes():
     logger.debug("Checking if an update is needed")
     if _needs_updating():
         logger.debug("Updating ...")
-        return _get_update()
+        return _get_updates()
     else:
         logger.debug("An update is NOT needed")
         with open(FILE_RELATIVE_PATH) as f:
             data = f.read()
         return data
+
+
+if __name__ == "__main__":
+    logger.info("Fetching FO76 Silo codes ...")
+    print(_get_updates())
