@@ -81,10 +81,15 @@ TBA
 
 ## reference
 
-- [PyPI - slack-sdk](https://pypi.org/project/slack-sdk/)
-- [PyPI - slack-bolt](https://pypi.org/project/slack-bolt/)
-- [GitHub - Slack Developer Kit for Python](https://github.com/slackapi/python-slack-sdk)
-- [Slack - api](https://api.slack.com/)
-- [Slack - apps](https://api.slack.com/apps)
-- [Slack Bolt - Getting started](https://slack.dev/bolt-python/tutorial/getting-started)
-- [Slack - Block Kit Builder](https://app.slack.com/block-kit-builder)
+- PyPI
+  - [PyPI - slack-sdk](https://pypi.org/project/slack-sdk/)
+  - [PyPI - slack-bolt](https://pypi.org/project/slack-bolt/)
+- github
+  - [GitHub - Slack Developer Kit for Python](https://github.com/slackapi/python-slack-sdk)
+- slack.com
+  - [Slack - api](https://api.slack.com/)
+  - [Slack - apps](https://api.slack.com/apps)
+  - [Slack - Block Kit Builder](https://app.slack.com/block-kit-builder)
+- slack.dev/bolt-python
+  - [Slack Bolt - Getting started](https://slack.dev/bolt-python/tutorial/getting-started)
+  - [Slack Bolt - concepts](https://slack.dev/bolt-python/concepts)
