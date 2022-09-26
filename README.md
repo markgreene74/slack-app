@@ -68,6 +68,12 @@ Run `app.py`:
 export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
 ```
 
+### force an update of the FO76 Silo codes
+
+```shell
+python bot/fo76.py
+```
+
 ## development
 
 Run `app.py` in debug mode:

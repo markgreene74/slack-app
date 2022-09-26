@@ -21,8 +21,11 @@ logger.setLevel(cfg.log_level)
 logger.addHandler(cfg.ch)
 
 
-def _needs_updating():
+def _check_data_dir():
     os.makedirs(DIRNAME, exist_ok=True)
+
+
+def _needs_updating():
     if not os.path.isfile(FILE_RELATIVE_PATH):
         logger.debug(f"{FILE_RELATIVE_PATH} does not exist, triggering an update")
         return True
@@ -66,6 +69,7 @@ def _get_updates():
 
 def get_codes():
     logger.debug("Checking if an update is needed")
+    _check_data_dir()
     if _needs_updating():
         logger.debug("Updating ...")
         return _get_updates()
@@ -78,4 +82,5 @@ def get_codes():
 
 if __name__ == "__main__":
     logger.info("Fetching FO76 Silo codes ...")
+    _check_data_dir()
     print(_get_updates())
