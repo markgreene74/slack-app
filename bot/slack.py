@@ -1,17 +1,18 @@
-import os
 import logging
-
+import bot.config as cfg
 from slack_bolt import App
-from slack_bolt.adapter.socket_mode import SocketModeHandler
 
-app = App(token=os.environ.get("SLACK_BOT_TOKEN"))
+logger = logging.getLogger(__name__)
+logger.setLevel(cfg.log_level)
+logger.addHandler(cfg.ch)
+
+app = App(token=cfg.SLK_BOT_TOKEN)
+logger.debug("Bolt started")
+
 
 # reply to messages containing "hello"
 @app.message("hello")
 def message_hello(message, say):
     # say() sends a message to the channel where the event was triggered
+    logger.info(f"hello message - user {message['user']}")
     say(f"Hey there <@{message['user']}>!")
-
-
-if __name__ == "__main__":
-    SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()

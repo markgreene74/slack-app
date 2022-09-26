@@ -4,7 +4,7 @@ TOC
 - [pre-work](#pre-work)
   - [pyenv](#pyenv)
   - [pre-commit](#pre-commit)
-  - [github workflows](github-workflows)
+  - [github workflows](#github-workflows)
 - [usage](#usage)
 - [development](#development)
 - [test](#test)
@@ -14,7 +14,7 @@ TOC
 
 ### pyenv:
 
-```
+```shell
 # update pyenv
 cd ${PYENV_ROOT}/plugins/python-build/../.. && git pull && cd -
 
@@ -38,17 +38,17 @@ pyenv activate slack-app-venv
 `pre-commit`, `black`, `pylint` are included in `requirements-dev.txt`.
 
 Make sure `pre-commit` is installed:
-```
+```shell
 pre-commit --version
 ```
 
 Set up the git hook scripts:
-```
+```shell
 pre-commit install
 ```
 
 First run `pre-commit` on all files:
-```
+```shell
 pre-commit run --all-files
 ```
 
@@ -58,11 +58,22 @@ TBA
 
 ## usage
 
-TBA
+Export the environment variables:
+```shell
+source .secrets/ENV_VARS
+```
+
+Run `app.py`:
+```shell
+export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
+```
 
 ## development
 
-TBA
+Run `app.py` in debug mode:
+```shell
+export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; SLACK_BOT_DEBUG=true; python app.py
+```
 
 ## test
 
@@ -77,5 +88,3 @@ TBA
 - [Slack - apps](https://api.slack.com/apps)
 - [Slack Bolt - Getting started](https://slack.dev/bolt-python/tutorial/getting-started)
 - [Slack - Block Kit Builder](https://app.slack.com/block-kit-builder)
-
-https://slack.dev/bolt-python/tutorial/getting-started
