@@ -27,3 +27,16 @@ def message_hello(message, say):
 def message_fo76(message, say):
     logger.info(f"FO76 requested by user: {message['user']}")
     say(f"FO76 silo codes:\n{fo76.get_codes()}")
+
+
+# handle message deletion
+@app.event("message")
+def handle_message_events(body):
+    if body["event"]["subtype"] == "message_deleted":
+        _message_deleted = body["event"]["previous_message"]
+        _id = _message_deleted.get("user") or _message_deleted.get("bot_id")
+        _type = _message_deleted.get("type")
+        _text = _message_deleted.get("text")
+        logger.info(f"{_type} from {_id} was deleted - Text: {_text}")
+    else:
+        logger.info(body)
