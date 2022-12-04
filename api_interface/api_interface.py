@@ -7,4 +7,11 @@ logger = logging.getLogger(__name__)
 logger.setLevel(cfg.log_level)
 logger.addHandler(cfg.ch)
 
-print("Hello World")
+
+def query(url):
+    if (not url.startswith("http://")) and (not url.startswith("https://")):
+        url = f"http://{url}"
+
+    response = requests.get(url)
+    logger.info(f"{response.status_code}")
+    return f"{url}: {response.text}"
