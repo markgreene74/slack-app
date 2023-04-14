@@ -1,0 +1,5 @@
+.git/
+.gitignore
+.idea/
+.pytest_cache/
+*/.pytest_cache/
