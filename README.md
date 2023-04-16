@@ -19,9 +19,6 @@ TOC
 # update pyenv
 cd ${PYENV_ROOT}/plugins/python-build/../.. && git pull && cd -
 
-# NOTE: on codeanywhere PYENV_ROOT is not defined, just use:
-# cd /home/cabox/.pyenv/plugins/python-build/../.. && git pull && cd -
-
 # install liblzma
 sudo apt update
 sudo apt install liblzma-dev
@@ -36,7 +33,7 @@ pyenv activate slack-app-venv
 
 ### pre-commit
 
-`pre-commit`, `black`, `pylint` are included in `requirements-dev.txt`.
+`pre-commit`, `black`, `pylint` and `flake8` are included in `requirements-dev.txt`.
 
 Make sure `pre-commit` is installed:
 ```shell
@@ -61,7 +58,7 @@ TBA
 
 Export the environment variables:
 ```shell
-source .secrets/ENV_VARS
+source ~/.secrets/ENV_VARS
 ```
 
 Run `app.py`:
