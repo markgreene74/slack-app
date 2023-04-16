@@ -8,6 +8,7 @@ TOC
 - [usage](#usage)
 - [development](#development)
 - [test](#test)
+- [with docker](#with-docker)
 - [reference](#reference)
 
 ## pre-work
@@ -25,11 +26,11 @@ cd ${PYENV_ROOT}/plugins/python-build/../.. && git pull && cd -
 sudo apt update
 sudo apt install liblzma-dev
 
-# install the latest 3.9.x release
-pyenv install 3.9.14
+# install the latest 3.10.x release
+pyenv install 3.10.11
 
 # create a virtual environment and activate it
-pyenv virtualenv 3.9.14 slack-app-venv
+pyenv virtualenv 3.10.11 slack-app-venv
 pyenv activate slack-app-venv
 ```
 
@@ -84,6 +85,35 @@ export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; SLACK_BOT_DEBUG=true; python app
 ## test
 
 TBA
+
+## with docker
+
+### run the application
+
+```shell
+docker build --target deploy -t slack-app .
+docker run --env-file ~/.secrets/ENV_VARS --rm slack-app
+```
+
+### run the tests
+
+```shell
+docker build --target test -t slack-app-test .
+docker run --rm slack-app-test
+```
+
+run the test container interactively
+
+```shell
+docker run -it --rm slack-app-test bash
+```
+
+### start the container for development
+
+```shell
+docker build --target dev -t slack-app-dev .
+docker run --env-file ~/.secrets/ENV_VARS -it --rm slack-app-dev
+```
 
 ## reference
 
