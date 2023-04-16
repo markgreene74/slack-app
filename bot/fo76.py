@@ -14,7 +14,7 @@ except ModuleNotFoundError:
 FILENAME = "fo76"
 DIRNAME = os.path.join("bot", ".tmp_data")
 FILE_RELATIVE_PATH = os.path.join(DIRNAME, FILENAME)
-NC_URL = "https://nukacrypt.com/"
+URL = "https://www.falloutbuilds.com"
 
 logger = logging.getLogger(__name__)
 logger.setLevel(cfg.log_level)
@@ -34,27 +34,28 @@ def _needs_updating():
     days_old = (datetime.today() - modified).days
     logger.info(f"FO76 last checked: {modified.date()=}")
 
-    return True if days_old >= 7 else False
+    return True if days_old >= 5 else False
 
 
 def _get_updates():
     logger.debug("Fetching data")
 
     ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
-    response = requests.get(NC_URL, headers={"User-Agent": ua})
+    response = requests.get(URL, headers={"User-Agent": ua})
     logger.debug(f"{response.status_code=}")
-    nc_content = str(response.content)
+    content = str(response.content)
 
-    silos = re.findall(r"\>(ALPHA|BRAVO|CHARLIE)\<", nc_content)
-    codes = re.findall(r"\>(\d+)\<", nc_content)
+    silos = re.findall(r"\>(ALPHA|BRAVO|CHARLIE)\<", content)
+    codes = re.findall(r"\>(\d+\s*\d+\s*\d+)\<", content)
 
     # >>> silos
     # ['ALPHA', 'BRAVO', 'CHARLIE']
     # >>> codes
-    # ['61436701', '36758567', '79473176']
+    # ['841 38 947', '676 23 748', '512 39 897']
     # >>> list(zip(silos, codes))
-    # [('ALPHA', '61436701'), ('BRAVO', '36758567'), ('CHARLIE', '79473176')]
-    logger.debug(f"{silos=} {codes=}")
+    # [('ALPHA', '841 38 947'), ('BRAVO', '676 23 748'), ('CHARLIE', '512 39 897')]
+
+    logger.debug(f"Found: {silos=} {codes=}")
 
     s_c_list = [f"{s}:{c}" for s, c in list(zip(silos, codes))]
     file_content = "\n".join(s_c_list)
