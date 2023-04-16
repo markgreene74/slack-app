@@ -1,13 +1,19 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/python:3.9-bullseye",
+  "name": "slack-app-3-10",
+  "image": "mcr.microsoft.com/devcontainers/python:3.10-bullseye",
+
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "configureZshAsDefaultShell": true,
       "username": "devcontainer"
     },
-    "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
     "ghcr.io/devcontainers-contrib/features/black:2": {},
-    "ghcr.io/devcontainers-contrib/features/isort:2": {},
+    "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
     "ghcr.io/devcontainers-contrib/features/pylint:2": {},
-  }
+    "ghcr.io/devcontainers-contrib/features/flake8:2": {},
+  },
+
+  "postCreateCommand": "apt-get update && apt-get install liblzma-dev -y",
+  "postCreateCommand": "pip3 install --user -r requirements-test.txt",
+
 }
