@@ -1,7 +1,8 @@
-from datetime import datetime
 import logging
 import os
 import re
+from datetime import datetime
+
 import requests
 
 # needed to run fo76 standalone/manually

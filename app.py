@@ -1,10 +1,9 @@
 import logging
 
-import bot.config as cfg
-import bot.slack as slk
-
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
+import bot.config as cfg
+import bot.slack as slk
 
 if __name__ == "__main__":
     logger = logging.getLogger(__name__)

@@ -1,9 +1,11 @@
 import logging
 import re
+
+from slack_bolt import App
+
+import api_interface.api_interface as api
 import bot.config as cfg
 import bot.fo76 as fo76
-import api_interface.api_interface as api
-from slack_bolt import App
 
 # message patterns
 pattern_fo76 = re.compile(r"[fF][oO]76|\!76|^76$")
