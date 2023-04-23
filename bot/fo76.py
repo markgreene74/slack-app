@@ -21,7 +21,7 @@ logger.setLevel(cfg.log_level)
 logger.addHandler(cfg.ch)
 
 
-def _check_data_dir():
+def check_data_dir():
     os.makedirs(DIRNAME, exist_ok=True)
 
 
@@ -37,7 +37,7 @@ def _needs_updating():
     return True if days_old >= 5 else False
 
 
-def _get_updates():
+def get_updates(save_file=True):
     logger.debug("Fetching data")
 
     ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
@@ -61,19 +61,20 @@ def _get_updates():
     file_content = "\n".join(s_c_list)
     logger.debug(f"{file_content=}")
 
-    with open(FILE_RELATIVE_PATH, "w") as f:
-        f.write(file_content)
-    logger.info(f"Updated {FILE_RELATIVE_PATH}")
+    if save_file:
+        check_data_dir()
+        with open(FILE_RELATIVE_PATH, "w") as f:
+            f.write(file_content)
+        logger.info(f"Updated {FILE_RELATIVE_PATH}")
 
     return file_content
 
 
 def get_codes():
     logger.debug("Checking if an update is needed")
-    _check_data_dir()
     if _needs_updating():
         logger.debug("Updating ...")
-        return _get_updates()
+        return get_updates()
     else:
         logger.debug("An update is NOT needed")
         with open(FILE_RELATIVE_PATH) as f:
@@ -83,5 +84,4 @@ def get_codes():
 
 if __name__ == "__main__":
     logger.info("Fetching FO76 Silo codes ...")
-    _check_data_dir()
-    print(_get_updates())
+    print(get_updates(save_file=False))
