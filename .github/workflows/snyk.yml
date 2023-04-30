@@ -1,4 +1,4 @@
-name: Snyk Python (3.10) Action
+name: Snyk (Python 3.10)
 
 on:
   push:

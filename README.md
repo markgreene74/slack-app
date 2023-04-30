@@ -4,7 +4,9 @@ TOC
 - [pre-work](#pre-work)
   - [pyenv](#pyenv)
   - [pre-commit](#pre-commit)
-  - [github workflows](#github-workflows)
+- [github](#github)
+  - [codespaces](#codespaces)
+  - [actions](#actions)
 - [usage](#usage)
 - [development](#development)
 - [test](#test)
@@ -20,8 +22,8 @@ TOC
 cd ${PYENV_ROOT}/plugins/python-build/../.. && git pull && cd -
 
 # install liblzma
-sudo apt update
-sudo apt install liblzma-dev
+sudo apt update && \
+  sudo apt install liblzma-dev
 
 # install the latest 3.10.x release
 pyenv install 3.10.11
@@ -50,21 +52,37 @@ First run `pre-commit` on all files:
 pre-commit run --all-files
 ```
 
-### github workflows
+## github
 
-TBA
+### codespaces
+
+A [devcontainer.json](.devcontainer/devcontainer.json) file has been added for custom Codespaces which include `pre-commit` hooks.
+
+### actions
+
+Multiple GitHub Actions (workflow) are configured to ensure automated testing, linting and security scans ([Snyk](https://snyk.io/)).
+
+Actions:
+
+|                                                              | on `push` | on PR  | schedule |
+| ------------------------------------------------------------ | --------- | ------ | -------- |
+| [CodeQL](.github/workflows/codeql.yml)                       | `main`    | `main` | Y        |
+| [Build and publish](.github/workflows/docker-publish.yml)    | `main`    | N      | N        |
+| [Run tests and lint](.github/workflows/python-run-tests.yml) | `main`    | `main` | N        |
+| [Snyk](.github/workflows/snyk.yml)                           | `main`    | `main` | N        |
 
 ## usage
 
-Export the environment variables:
-```shell
-source ~/.secrets/ENV_VARS
-```
+It is possible to run tests [with docker](#with-docker), or manually like in this example:
 
-Run `app.py`:
-```shell
-export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
-```
+- export the environment variables:
+    ```shell
+    source ~/.secrets/ENV_VARS
+    ```
+- run `app.py`:
+    ```shell
+    export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
+    ```
 
 ### force an update of the FO76 Silo codes
 
@@ -81,7 +99,26 @@ export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; SLACK_BOT_DEBUG=true; python app
 
 ## test
 
-TBA
+GH Actions is configured to run `pytest` on `push` to the `main` branch and on PRs opened against the `main` branch.
+
+It is possible to run tests [with docker](#with-docker), or manually like in this example:
+```
+(slack-app-venv) (...):~/github/slack-app$ pytest
+========================= test session starts =========================
+platform linux -- Python 3.10.11, pytest-7.3.1, pluggy-1.0.0
+rootdir: /home/user/github/slack-app
+collected 1 item
+
+tests/test_dummy.py .                                           [100%]
+
+========================== 1 passed in 0.01s ==========================
+(slack-app-venv) (...):~/github/slack-app$
+```
+
+Note that outside a virtual environment it will be needed to add `PYTHONPATH` explicitly:
+```shell
+export PYTHONPATH=. ; pytest
+```
 
 ## with docker
 
