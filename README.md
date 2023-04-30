@@ -64,12 +64,12 @@ Multiple GitHub Actions (workflow) are configured to ensure automated testing, l
 
 Actions:
 
-|                                                           | on `push` | on PR  | schedule |
-| --------------------------------------------------------- | --------- | ------ | -------- |
-| [CodeQL](.github/workflows/codeql.yml)                    | `main`    | `main` | Y        |
-| [Build and publish](.github/workflows/docker-publish.yml) | `main`    | N      | N        |
-| [Run tests and linters](.github/workflows/python-app.yml) | `main`    | `main` | N        |
-| [Snyk](.github/workflows/snyk.yml)                        | `main`    | `main` | N        |
+|                                                              | on `push` | on PR  | schedule |
+| ------------------------------------------------------------ | --------- | ------ | -------- |
+| [CodeQL](.github/workflows/codeql.yml)                       | `main`    | `main` | Y        |
+| [Build and publish](.github/workflows/docker-publish.yml)    | `main`    | N      | N        |
+| [Run tests and lint](.github/workflows/python-run-tests.yml) | `main`    | `main` | N        |
+| [Snyk](.github/workflows/snyk.yml)                           | `main`    | `main` | N        |
 
 ## usage
 
