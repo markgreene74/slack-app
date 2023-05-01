@@ -1,41 +1,34 @@
+from collections import namedtuple
+
+import pytest
 import requests
 
 from bot.fo76 import get_updates
 
+Response = namedtuple("Response", "status_code content")
 
-class MockResponseGood:
-    def __init__(self) -> None:
-        self.status_code = 200
-        self.content = """
-<p>ALPHA</p>, <p>841 38 947</p>
-<p>BRAVO</p>, <p>676 23 748</p>
-<p>CHARLIE</p>, <p>512 39 897</p>"""
+RESPONSE_GOOD = Response(
+    200,
+    "<p>ALPHA</p>, <p>841 38 947</p>\n<p>BRAVO</p>, <p>676 23 748</p>\n<p>CHARLIE</p>, <p>512 39 897</p>",
+)
+RESPONSE_BAD = Response(
+    200,
+    "<p>ALPHA</p>, <p>841  38  947</p>\n<p>BRAVO</p>, <p>676 3 748</p>\n<p>CHARLIE</p>, <p>51239897</p>",
+)
 
 
-def test_get_updates_success(monkeypatch):
+@pytest.mark.parametrize(
+    "mocked_response,expected",
+    [
+        (RESPONSE_GOOD, "ALPHA:841 38 947\nBRAVO:676 23 748\nCHARLIE:512 39 897"),
+        (RESPONSE_BAD, ""),
+    ],
+)
+def test_get_updates(monkeypatch, mocked_response, expected):
     def mock_get(*args, **kwargs):
-        return MockResponseGood()
+        return mocked_response
 
     monkeypatch.setattr(requests, "get", mock_get)
 
     content = get_updates(save_file=False)
-    assert content == "ALPHA:841 38 947\nBRAVO:676 23 748\nCHARLIE:512 39 897"
-
-
-class MockResponseBad:
-    def __init__(self) -> None:
-        self.status_code = 200
-        self.content = """
-<p>ALPHA</p>, <p>841  38  947</p>
-<p>BRAVO</p>, <p>676 3 748</p>
-<p>CHARLIE</p>, <p>51239897</p>"""
-
-
-def test_get_updates_failed(monkeypatch):
-    def mock_get(*args, **kwargs):
-        return MockResponseBad()
-
-    monkeypatch.setattr(requests, "get", mock_get)
-
-    content = get_updates(save_file=False)
-    assert content == ""
+    assert content == expected
