@@ -47,7 +47,7 @@ def get_updates(save_file=True):
     content = str(response.content)
 
     silos = re.findall(r"\>(ALPHA|BRAVO|CHARLIE)\<", content)
-    codes = re.findall(r"\>(\d+\s*\d+\s*\d+)\<", content)
+    codes = re.findall(r"\>(\d{3}\s{1}\d{2}\s{1}\d{3})\<", content)
 
     # >>> silos
     # ['ALPHA', 'BRAVO', 'CHARLIE']
