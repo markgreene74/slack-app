@@ -1,6 +1,8 @@
+| [![CodeQL](https://github.com/markgreene74/slack-app/actions/workflows/codeql.yml/badge.svg)](https://github.com/markgreene74/slack-app/actions/workflows/codeql.yml) | [![Snyk](https://github.com/markgreene74/slack-app/actions/workflows/snyk.yml/badge.svg)](https://github.com/markgreene74/slack-app/actions/workflows/snyk.yml) | [![Tests](https://github.com/markgreene74/slack-app/actions/workflows/python-run-tests.yml/badge.svg)](https://github.com/markgreene74/slack-app/actions/workflows/python-run-tests.yml) |
+| --- | --- | --- |
+
 # slack-app
 
-TOC
 - [pre-work](#pre-work)
   - [pyenv](#pyenv)
   - [pre-commit](#pre-commit)
@@ -69,6 +71,7 @@ Actions:
 | [CodeQL](.github/workflows/codeql.yml)                       | `main`    | `main` | Y        |
 | [Build and publish](.github/workflows/docker-publish.yml)    | `main`    | N      | N        |
 | [Run tests and lint](.github/workflows/python-run-tests.yml) | `main`    | `main` | N        |
+| [Release](.github/workflows/release.yml)                     | `main`    | `main` | N        |
 | [Snyk](.github/workflows/snyk.yml)                           | `main`    | `main` | N        |
 
 ## usage
