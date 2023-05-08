@@ -6,10 +6,12 @@ from slack_bolt import App
 import api_interface.api_interface as api
 import bot.config as cfg
 import bot.fo76 as fo76
+import bot.messages
 
 # message patterns
 pattern_fo76 = re.compile(r"[fF][oO]76|\!76|^76$")
 pattern_hello = re.compile(r"[hH](i|ello|ey)")
+pattern_test = bot.messages.messages_regex()
 
 logger = logging.getLogger(__name__)
 logger.setLevel(cfg.log_level)
@@ -32,6 +34,13 @@ def message_hello(message, say):
 def message_fo76(message, say):
     logger.info(f"FO76 requested by user: {message['user']}")
     say(f"FO76 silo codes:\n{fo76.get_codes()}")
+
+
+@app.message(pattern_test)
+def message_test(message, say):
+    logger.info(f"test requested by user: {message['user']}")
+    reply = bot.messages.find_reply(message["text"])
+    say(f"{reply} <@{message['user']}>!")
 
 
 @app.message(re.compile(r"debug"))
