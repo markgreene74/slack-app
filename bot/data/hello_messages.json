@@ -1,7 +1,7 @@
 {
-    "hi": "Hey there",
-    "ciao": "Ciao",
-    "salut": "Salut",
-    "hallo": "Hallo",
-    "ola": "Olá"
+    "hi|Hi|hello|Hello": "Hey there",
+    "ciao|Ciao|buon giorno|Buon giorno|buona sera|Buona sera": "Ciao",
+    "salut|Salut": "Salut",
+    "hallo|Hallo": "Hallo",
+    "ola|Ola|bom dia|Bom dia|boa noite|Boa noite": "Olá"
 }
