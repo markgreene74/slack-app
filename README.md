@@ -97,7 +97,14 @@ python bot/fo76.py
 
 Run `app.py` in debug mode:
 ```shell
-export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; SLACK_BOT_DEBUG=true; python app.py
+export SLACK_BOT_DEBUG=true && \
+export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
+```
+
+To switch off debug mode unset the env variable:
+```shell
+unset SLACK_BOT_DEBUG && \
+export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
 ```
 
 ## test
