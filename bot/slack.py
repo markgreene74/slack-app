@@ -19,7 +19,9 @@ app = App(token=cfg.SLK_BOT_TOKEN)
 logger.debug("Bolt started")
 
 
-# reply to messages containing different patterns
+#  ### messages ###
+
+
 @app.message(pattern_hello)
 def message_hello(message, say):
     logger.info(f"hello requested by user: {message['user']}")
@@ -32,8 +34,21 @@ def message_fo76(message, say):
     say(f"FO76 silo codes:\n{fo76.get_codes()}")
 
 
+@app.message(re.compile(r"debug"))
+def message_debug(say, context):
+    # regular expression matches are inside of context.matches
+    # say(f"{context['matches']}")
+    if logger.level == logging.DEBUG:
+        say(f"{type(context)}\n\n{context.items()}\n\n{context.keys()}")
+    else:
+        say(":sleeping:")
+
+
+#  ### commands ###
+
+
 @app.command("/api")
-def repeat_text(ack, say, command):
+def command_api(ack, say, command):
     logger.info(
         f"API query requested by user: {command['user_name']} ({command['user_id']}) in the channel {command['channel_name']} ({command['channel_id']})"
     )
@@ -47,16 +62,11 @@ def repeat_text(ack, say, command):
     say(f"{response}")
 
 
-@app.message(re.compile(r"debug"))
-def test_regex(say, context):
-    # regular expression matches are inside of context.matches
-    # say(f"{context['matches']}")
-    say(f"{type(context)}\n\n{context.items()}\n\n{context.keys()}")
+#  ### events ###
 
 
-# handle message deletion
 @app.event("message")
-def handle_message_events(body):
+def event_message_handler(body):
     if body["event"].get("subtype") == "message_deleted":
         _message_deleted = body["event"]["previous_message"]
         _id = _message_deleted.get("user") or _message_deleted.get("bot_id")
