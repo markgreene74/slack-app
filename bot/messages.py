@@ -1,6 +1,7 @@
 import json
 import logging
 import re
+from string import punctuation
 from typing import Pattern
 
 import bot.config as cfg
@@ -21,12 +22,19 @@ def load_data(file_name: str) -> dict:
 def find_reply(message: str, file_name: str) -> str:
     data = load_data(file_name)
     logger.info(
-        f"loaded {file_name} data, now trying to match {message} and find a reply"
+        f'loaded {file_name} data, now trying to match "{message}" and find a reply'
     )
+
+    message_trimmed = (
+        message.lower().replace(" ", "").translate(str.maketrans("", "", punctuation))
+    )
+    logger.debug(f"{message=}, {message_trimmed=}")
+
     for key, response in data.items():
         logger.debug(f"{key=}, {response=}")
-        if message.lower() in key:
+        if message_trimmed in key:
             return response
+
     return "I didn't catch that!"
 
 
@@ -37,5 +45,5 @@ def regex_from_file(file_name: str) -> Pattern[str]:
     for key in data.keys():
         all_keys.append(key)
     all_keys_str = "|".join(all_keys)
-    logger.debug(f"{len(all_keys)} extracted, {all_keys_str=}")
+    logger.debug(f"extracted {len(all_keys)} keys: {all_keys_str=}")
     return re.compile(all_keys_str)
