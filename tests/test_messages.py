@@ -18,3 +18,11 @@ def test_load_data(monkeypatch):
     # test_data = load_data("test_messages")
     # assert test_data == ""
     pass
+
+
+def test_find_reply():
+    pass
+
+
+def test_regex_from_file():
+    pass
