@@ -10,7 +10,7 @@ def change_test_dir(monkeypatch, tmp_path):
     d = tmp_path / "bot" / "data"
     d.mkdir(parents=True)
     f = d / "test_messages.json"
-    shutil.copy("test_data/test_messages.json", f)
+    shutil.copy("tests/test_data/test_messages.json", f)
     monkeypatch.chdir(d)
 
 
