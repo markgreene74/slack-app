@@ -1,0 +1,11 @@
+{
+    "hi|[hH][iI]|hello|[hH][eE][lL][lL][oO]|hey|[hH][eE][yY]": "Hey there",
+    "ciao|[cC][iI][aA][oO]": "Ciao",
+    "buongiorno|[bB][uU][oO][nN][ ]*[gG][iI][oO][rR][nN][oO]": "Buon giorno",
+    "buonasera|[bB][uU][oO][nN][aA][ ]*[sS][eE][rR][aA]": "Buona sera",
+    "salut|[sS][aA][lL][uU][tT]": "Salut",
+    "hallo|[hH][aA][lL][lL][oO]": "Hallo",
+    "ola|olá|[oO][lL][áaA]": "Olá",
+    "bomdia|[bB][oO][mM][ ]*[dD][iI][aA]": "Bom dia",
+    "boanoite|[bB][oO][aA][ ]*[nN][oO][iI][tT][eE]": "Boa noite"
+}
