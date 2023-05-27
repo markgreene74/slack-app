@@ -1,3 +1,4 @@
+import re
 import shutil
 
 import pytest
@@ -9,6 +10,10 @@ LOAD_DATA_EXPECTED = {
     "secondtest|[sS][eE][cC][oO][nN][dD][ ]*[tT][eE][sS][tT]": "This is the reply to 'second test'",
     "thirdtest|[tT][hH][iI][rR][dD][ ]*[tT][eE][sS][tT]": "This is the reply to 'third test'",
 }
+
+REGEX_EXPECTED = re.compile(
+    "firsttest|[fF][iI][rR][sS][tT][ ]*[tT][eE][sS][tT]|testfirst|[tT][eE][sS][tT][fF][iI][rR][sS][tT]|secondtest|[sS][eE][cC][oO][nN][dD][ ]*[tT][eE][sS][tT]|thirdtest|[tT][hH][iI][rR][dD][ ]*[tT][eE][sS]"
+)
 
 
 @pytest.fixture(autouse=True)
@@ -28,9 +33,18 @@ def test_load_data():
     assert test_data == LOAD_DATA_EXPECTED
 
 
-def test_find_reply():
-    pass
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("abc", "I didn't catch that!"),
+        ("FIRST TEST", "This is the reply to 'first test' and 'testfirst'"),
+        ("test   !first", "This is the reply to 'first test' and 'testfirst'"),
+    ],
+)
+def test_find_reply(test_input, expected):
+    assert find_reply(test_input, "test_messages") == expected
 
 
 def test_regex_from_file():
-    pass
+    test_regex = regex_from_file("test_messages")
+    assert str(test_regex) == str(REGEX_EXPECTED)
