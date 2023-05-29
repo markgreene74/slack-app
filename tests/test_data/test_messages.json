@@ -1,0 +1,5 @@
+{
+    "firsttest|[fF][iI][rR][sS][tT][ ]*[tT][eE][sS][tT]|testfirst|[tT][eE][sS][tT][fF][iI][rR][sS][tT]": "This is the reply to 'first test' and 'testfirst'",
+    "secondtest|[sS][eE][cC][oO][nN][dD][ ]*[tT][eE][sS][tT]": "This is the reply to 'second test'",
+    "thirdtest|[tT][hH][iI][rR][dD][ ]*[tT][eE][sS][tT]": "This is the reply to 'third test'"
+}
