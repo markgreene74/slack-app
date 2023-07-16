@@ -132,3 +132,4 @@ dmypy.json
 .idea
 .secrets/
 .tmp_data/
+logs/
