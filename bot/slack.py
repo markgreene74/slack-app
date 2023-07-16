@@ -14,6 +14,7 @@ pattern_fo76 = re.compile(r"[fF][oO]76|\!76|^76$")
 logger = logging.getLogger(__name__)
 logger.setLevel(cfg.log_level)
 logger.addHandler(cfg.ch)
+logger.addHandler(cfg.fh)
 
 app = App(token=cfg.SLK_BOT_TOKEN)
 logger.debug("Bolt started")

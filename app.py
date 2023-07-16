@@ -9,6 +9,7 @@ if __name__ == "__main__":
     logger = logging.getLogger(__name__)
     logger.setLevel(cfg.log_level)
     logger.addHandler(cfg.ch)
+    logger.addHandler(cfg.fh)
 
     logger.info(
         f"Starting slack-app (log level: {logging.getLevelName(logger.getEffectiveLevel())})"
