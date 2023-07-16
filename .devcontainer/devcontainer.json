@@ -14,6 +14,7 @@
   },
 
   "postCreateCommand": "apt-get update && apt-get install liblzma-dev -y",
+  "postCreateCommand": "pip3 install --user --upgrade pip setuptools",
   "postCreateCommand": "pip3 install --user -r requirements-test.txt",
   "postCreateCommand": "pre-commit install",
 
