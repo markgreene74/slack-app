@@ -1,11 +1,13 @@
 import logging
 import os
+from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 # ### logging config ###
 
 # logfile
 log_file_name = "slack-app.log"
+log_file_max_size_bytes = 20 * 10**6  # 20MB
 # TODO need to revisit after the config is moved
 #      to a toml file https://github.com/markgreene74/slack-app/issues/21
 if (log_file_path := Path("/var/log/slack-app")).is_dir():
@@ -24,7 +26,7 @@ log_formatter = logging.Formatter("%(asctime)s %(levelname)s:%(message)s [%(name
 log_formatter.datefmt = "%Y/%m/%d %H:%M:%S"
 
 # handlers
-fh = logging.FileHandler(log_file)
+fh = RotatingFileHandler(log_file, maxBytes=log_file_max_size_bytes, backupCount=5)
 fh.setLevel(log_level)
 fh.setFormatter(log_formatter)
 ch = logging.StreamHandler()
