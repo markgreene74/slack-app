@@ -20,6 +20,7 @@ URL = "https://www.falloutbuilds.com"
 logger = logging.getLogger(__name__)
 logger.setLevel(cfg.log_level)
 logger.addHandler(cfg.ch)
+logger.addHandler(cfg.fh)
 
 
 def check_data_dir():

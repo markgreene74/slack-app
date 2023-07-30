@@ -136,7 +136,12 @@ export PYTHONPATH=. ; pytest
 
 ```shell
 docker build --target deploy -t slack-app .
-docker run --env-file ~/.secrets/ENV_VARS --rm slack-app
+mkdir -p ./logs
+docker run \
+    --env-file ~/.secrets/ENV_VARS \
+    --rm \
+    --mount type=bind,source="$(pwd)"/logs,target=/var/log/slack-app \
+    slack-app
 ```
 
 ### run the tests

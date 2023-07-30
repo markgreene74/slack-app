@@ -4,6 +4,8 @@ FROM python:3.10-slim-bullseye AS base
 RUN apt-get update && \
     apt-get install liblzma-dev -y
 RUN adduser --disabled-login --gecos "" slack-app
+RUN mkdir -p /var/log/slack-app && \
+    chown slack-app:slack-app /var/log/slack-app
 RUN pip install --upgrade setuptools pip
 
 

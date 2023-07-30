@@ -7,6 +7,7 @@ import bot.config as cfg
 logger = logging.getLogger(__name__)
 logger.setLevel(cfg.log_level)
 logger.addHandler(cfg.ch)
+logger.addHandler(cfg.fh)
 
 
 def query(url):
