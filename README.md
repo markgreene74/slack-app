@@ -3,62 +3,59 @@
 
 # slack-app
 
-- [pre-work](#pre-work)
-  - [pyenv](#pyenv)
-  - [pre-commit](#pre-commit)
+- [quick start](#quick-start)
+  - [pre-work](#pre-work)
+  - [run slack-app](#run-slack-app)
+  - [run slack-app with docker](#run-slack-app-with-docker)
 - [github](#github)
   - [codespaces](#codespaces)
   - [actions](#actions)
-- [usage](#usage)
 - [development](#development)
-- [test](#test)
-- [with docker](#with-docker)
+- [deploy slack-app](#deploy-slack-app)
 - [reference](#reference)
+- [misc](#misc)
 
-## pre-work
+## quick start
 
-### pyenv:
+### pre-work
 
-```shell
-# update pyenv
-cd ${PYENV_ROOT}/plugins/python-build/../.. && git pull && cd -
+- create the `ENV_VARS` file containing the `SLACK_BOT_TOKEN` and  `SLACK_APP_TOKEN`
+    ```
+    SLACK_BOT_TOKEN=xoxb-<REPLACEME>
+    SLACK_APP_TOKEN=xapp-<REPLACEME>
+    ```
+- install the requirements and activate the virtual environment, see the [pre-work section in docs/development.md](docs/development.md#pre-work) for more details
 
-# install liblzma
-sudo apt update && \
-  sudo apt install liblzma-dev
+### run slack-app
 
-# install the latest 3.10.x release
-pyenv install 3.10.11
+- export the environment variables
+    ```shell
+    source ~/.secrets/ENV_VARS
+    ```
+- run `app.py`
+    ```shell
+    export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
+    ```
 
-# create a virtual environment and activate it
-pyenv virtualenv 3.10.11 slack-app-venv
-pyenv activate slack-app-venv
-```
+### run slack-app with docker
 
-### pre-commit
-
-`pre-commit`, `black`, `pylint` and `flake8` are included in `requirements-dev.txt`.
-
-Make sure `pre-commit` is installed:
-```shell
-pre-commit --version
-```
-
-Set up the git hook scripts:
-```shell
-pre-commit install
-```
-
-First run `pre-commit` on all files:
-```shell
-pre-commit run --all-files
-```
+- pull the image locally
+    ```shell
+    docker pull ghcr.io/markgreene74/slack-app:latest
+    ```
+- start the container
+    ```shell
+    docker run \
+        --env-file ~/.secrets/ENV_VARS \
+        --rm \
+        slack-app
+    ```
 
 ## github
 
 ### codespaces
 
-A [devcontainer.json](.devcontainer/devcontainer.json) file has been added for custom Codespaces which include `pre-commit` hooks.
+A [devcontainer.json](.devcontainer/devcontainer.json) file has been added for custom Codespaces which include `pre-commit` hooks. See the GitHub documentation about [creating a codespace](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository) to work on `slack-app`.
 
 ### actions
 
@@ -67,102 +64,24 @@ Multiple GitHub Actions (workflow) are configured to ensure automated testing, l
 Actions:
 
 |                                                              | on `push`            | on PR  | schedule | run manually |
-| ------------------------------------------------------------ | -------------------- | ------ | -------- | ------------ |
+|--------------------------------------------------------------|----------------------|--------|----------|--------------|
 | [CodeQL](.github/workflows/codeql.yml)                       | `main`               | `main` | Y        | N            |
 | [Build and publish](.github/workflows/docker-publish.yml)    | `main`               | N      | N        | Y            |
 | [Run tests and lint](.github/workflows/python-run-tests.yml) | `main`, `feature/**` | `main` | N        | Y            |
 | [Release](.github/workflows/release.yml)                     | `main`               | `main` | N        | N            |
 | [Snyk](.github/workflows/snyk.yml)                           | `main`               | `main` | N        | N            |
 
-## usage
-
-It is possible to run tests [with docker](#with-docker), or manually like in this example:
-
-- export the environment variables:
-    ```shell
-    source ~/.secrets/ENV_VARS
-    ```
-- run `app.py`:
-    ```shell
-    export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
-    ```
-
-### force an update of the FO76 Silo codes
-
-```shell
-python bot/fo76.py
-```
-
 ## development
 
-Run `app.py` in debug mode:
-```shell
-export SLACK_BOT_DEBUG=true && \
-export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
-```
+See: [docs/development.md](docs/development.md)
 
-To switch off debug mode unset the env variable:
-```shell
-unset SLACK_BOT_DEBUG && \
-export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
-```
+## deploy slack-app
 
-## test
+See: [docs/deployment.md](docs/deployment.md)
 
-GH Actions is configured to run `pytest` on `push` to the `main` branch and on PRs opened against the `main` branch.
+## miscellanea
 
-It is possible to run tests [with docker](#with-docker), or manually like in this example:
-```
-(slack-app-venv) (...):~/github/slack-app$ pytest
-========================= test session starts =========================
-platform linux -- Python 3.10.11, pytest-7.3.1, pluggy-1.0.0
-rootdir: /home/user/github/slack-app
-collected 1 item
-
-tests/test_dummy.py .                                           [100%]
-
-========================== 1 passed in 0.01s ==========================
-(slack-app-venv) (...):~/github/slack-app$
-```
-
-Note that outside a virtual environment it will be needed to add `PYTHONPATH` explicitly:
-```shell
-export PYTHONPATH=. ; pytest
-```
-
-## with docker
-
-### run the application
-
-```shell
-docker build --target deploy -t slack-app .
-mkdir -p ./logs
-docker run \
-    --env-file ~/.secrets/ENV_VARS \
-    --rm \
-    --mount type=bind,source="$(pwd)"/logs,target=/var/log/slack-app \
-    slack-app
-```
-
-### run the tests
-
-```shell
-docker build --target test -t slack-app-test .
-docker run --rm slack-app-test
-```
-
-run the test container interactively
-
-```shell
-docker run -it --rm slack-app-test bash
-```
-
-### start the container for development
-
-```shell
-docker build --target dev -t slack-app-dev .
-docker run --env-file ~/.secrets/ENV_VARS -it --rm slack-app-dev
-```
+See: [docs/miscellanea.md](docs/miscellanea.md)
 
 ## reference
 
