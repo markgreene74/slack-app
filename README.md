@@ -77,7 +77,7 @@ See: [docs/development.md](docs/development.md)
 
 ## deploy slack-app
 
-See: [docs/deployment.md](docs/deployment.md)
+See: [docs/running-slack-app.md](docs/running-slack-app.md)
 
 ## miscellanea
 
