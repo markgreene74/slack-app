@@ -82,12 +82,14 @@ See also [the pre-commit tips section in miscellanea.md](miscellanea.md#pre-comm
 Run `app.py` in debug mode
 ```shell
 export SLACK_BOT_DEBUG=true && \
+    export PYTHONPATH=.; \
     export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
 ```
 
 To switch off debug mode unset the env variable
 ```shell
 unset SLACK_BOT_DEBUG && \
+    export PYTHONPATH=.; \
     export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
 ```
 
