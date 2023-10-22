@@ -34,7 +34,7 @@
     ```
 - run `app.py`
     ```shell
-    export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
+    export PYTHONPATH=.; export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python slackapp/app.py
     ```
 
 ### run slack-app with docker

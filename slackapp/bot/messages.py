@@ -13,7 +13,7 @@ logger.addHandler(cfg.fh)
 
 
 def load_data(file_name: str) -> dict:
-    file_full_path = f"bot/data/{file_name}.json"
+    file_full_path = f"slackapp/bot/data/{file_name}.json"
     logger.info(f"loading data from {file_full_path}")
     with open(file_full_path) as f:
         data = f.read()
