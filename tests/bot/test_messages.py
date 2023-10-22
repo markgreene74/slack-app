@@ -3,7 +3,7 @@ import shutil
 
 import pytest
 
-from bot.messages import find_reply, load_data, regex_from_file
+from slackapp.bot.messages import find_reply, load_data, regex_from_file
 
 LOAD_DATA_EXPECTED = {
     "firsttest|[fF][iI][rR][sS][tT][ ]*[tT][eE][sS][tT]|testfirst|[tT][eE][sS][tT][fF][iI][rR][sS][tT]": "This is the reply to 'first test' and 'testfirst'",

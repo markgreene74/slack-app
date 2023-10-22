@@ -1,5 +1,8 @@
 # syntax=docker/dockerfile:1
 
+# Main application directory
+ARG APP_DIRECTORY=slackapp
+
 FROM python:3.10-slim-bullseye AS base
 RUN apt-get update && \
     apt-get install liblzma-dev -y
@@ -15,7 +18,7 @@ ENV PATH="${PATH}:/home/slack-app/.local/bin/"
 WORKDIR /usr/src/app
 COPY --chown=slack-app:slack-app requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt --quiet
-COPY --chown=slack-app:slack-app . .
+COPY --chown=slack-app:slack-app $APP_DIRECTORY ./
 CMD ["python", "app.py"]
 
 
@@ -25,7 +28,7 @@ ENV PATH="${PATH}:/home/slack-app/.local/bin/"
 WORKDIR /usr/src/app
 COPY --chown=slack-app:slack-app requirements*.txt .
 RUN pip install --no-cache-dir -r requirements-test.txt --quiet
-COPY --chown=slack-app:slack-app . .
+COPY --chown=slack-app:slack-app $APP_DIRECTORY ./
 CMD ["pytest"]
 
 

@@ -3,7 +3,7 @@ from collections import namedtuple
 import pytest
 import requests
 
-from bot.fo76 import get_updates
+from slackapp.bot.fo76 import get_updates
 
 Response = namedtuple("Response", "status_code content")
 

@@ -8,7 +8,7 @@ import requests
 # needed to run fo76 standalone/manually
 # ugly, but it works
 try:
-    import bot.config as cfg
+    import slackapp.bot.config as cfg
 except ModuleNotFoundError:
     import config as cfg
 

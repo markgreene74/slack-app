@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "Slack-app"
+version = "0.3.0"
+authors = [
+  { name="markgreene74", email="noreply@noemail.com.invalid" },
+]
+description = "A simple Slack app"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/markgreene74/slack-app"
+"Bug Tracker" = "https://github.com/markgreene74/slack-app/issues"

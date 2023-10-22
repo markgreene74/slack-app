@@ -2,7 +2,7 @@ import logging
 
 import requests
 
-import bot.config as cfg
+import slackapp.bot.config as cfg
 
 logger = logging.getLogger(__name__)
 logger.setLevel(cfg.log_level)
