@@ -17,7 +17,7 @@
 
 ### create a virtual environment
 
-While this is not strictly needed, it is a good idea to create a virtual environment to run and develop `slack-app`. See the Python documentation for more details on [Creating a virtual environments](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment).
+While not strictly needed, it is a good idea to create a virtual environment to run and develop `slack-app`. See the Python documentation for more details on [Creating a virtual environments](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment).
 
 It is possible to use `pyenv` and `pyenv-virtualenv` to easily create&manage different Python versions and virtual environments.
 
