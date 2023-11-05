@@ -5,6 +5,7 @@ set -euo pipefail
 ### variables
 
 APP_NAME="slack-app"
+ENV_FILE="${HOME}/.secrets/ENV_VARS"
 SCRIPT_NAME=$(basename -- "${0}")
 HELP_USAGE="${SCRIPT_NAME} [--build|build] [--help|help] [--with-watchtower|with-watchtower]
 
@@ -21,11 +22,23 @@ ${HELP_USAGE}"
 BUILD_LOCALLY=false
 WITH_WATCHTOWER=false
 
+### functions
+
+stop_container_if_running () {
+# check if a container is running and stop it
+CONTAINER_ID=$(docker ps --filter "name=${1}" --filter "status=running" --quiet)
+if [[ "${CONTAINER_ID}" ]]
+then
+  echo "A ${APP_NAME} container is already running. Stopping ${CONTAINER_ID} ..."
+  docker stop "${CONTAINER_ID}"
+fi
+}
+
 ### pre-flight
 
 if ! { [[ $(pwd) == *"slack-app"* ]] && [[ $(ls Dockerfile) ]]; }
 then
-  echo "The script ${0} was called from the wrong directory! Make sure to be in the 'slack-app' directory."
+  echo "The script ${SCRIPT_NAME} was called from the wrong directory! Make sure to be in the 'slack-app' directory."
   exit 1
 fi
 
@@ -46,10 +59,10 @@ do
         --with-watchtower|with-watchtower) echo "--watchtower selected"
                                            WITH_WATCHTOWER=true
             ;;
-        --*) echo "option $1 not recognised"
+        --*) echo "Option $1 not recognised"
              exit 1
             ;;
-        *) echo "argument $1 not recognised"
+        *) echo "Argument $1 not recognised"
            exit 1
             ;;
     esac
@@ -69,16 +82,22 @@ fi
 
 if $WITH_WATCHTOWER
 then
-  # start Watchtower
   # TODO add support for watchtower
-  echo "start Watchtower TBA"
+  # pull the watchtower image
+  # stop if already running
+  # start watchtower
+  echo "Start Watchtower"
 fi
 
 ### start slack-app
 
+# stop the old container if needed
+stop_container_if_running "${APP_NAME}"
+# start a new container
 docker run \
     -d \
-    --env-file ~/.secrets/ENV_VARS \
+    --env-file "${ENV_FILE}" \
     --rm \
     --mount type=bind,source="$(pwd)"/logs,target=/var/log/slack-app \
-    slack-app
+    --name "${APP_NAME}" \
+    "${APP_NAME}"
