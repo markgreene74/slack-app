@@ -1,7 +1,7 @@
 # running slack-app
 
-- [make the image available locally](#make-the-image-available-locally)
-- [start slack-app](#start-slack-app)
+- [run manually](#run-manually)
+- [use the helper script](#use-the-helper-script)
 
 ## run manually
 
@@ -29,6 +29,7 @@
         --env-file ~/.secrets/ENV_VARS \
         --rm \
         --mount type=bind,source="$(pwd)"/logs,target=/var/log/slack-app \
+        --name slack-app \
         slack-app
     ```
 
@@ -38,3 +39,10 @@
     ```shell
     scripts/run-in-docker.sh
     ```
+
+Optional arguments for `run-in-docker.sh`:
+- `--build`|`build`: build the Docker image locally instead of pulling it from `ghcr.io/markgreene74/slack-app`, default is `false`
+- `--help`|`help`: print the help and exit
+- `--with-watchtower`|`with-watchtower`: start Watchtower to automatically update and restart the container when a new version is available, default is `false`
+
+To learn more about Watchtower see https://github.com/containrrr/watchtower

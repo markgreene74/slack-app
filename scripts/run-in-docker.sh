@@ -82,11 +82,13 @@ fi
 
 if $WITH_WATCHTOWER
 then
-  # TODO add support for watchtower
-  # pull the watchtower image
-  # stop if already running
-  # start watchtower
-  echo "Start Watchtower"
+  # see https://github.com/containrrr/watchtower
+  stop_container_if_running watchtower
+  echo "Starting watchtower"
+  docker run -d \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
+    --name watchtower \
+    containrrr/watchtower
 fi
 
 ### start slack-app
@@ -94,6 +96,7 @@ fi
 # stop the old container if needed
 stop_container_if_running "${APP_NAME}"
 # start a new container
+echo "Starting ${APP_NAME}"
 docker run \
     -d \
     --env-file "${ENV_FILE}" \
