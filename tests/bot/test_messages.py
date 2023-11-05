@@ -3,7 +3,7 @@ import shutil
 
 import pytest
 
-from bot.messages import find_reply, load_data, regex_from_file
+from slackapp.bot.messages import find_reply, load_data, regex_from_file
 
 LOAD_DATA_EXPECTED = {
     "firsttest|[fF][iI][rR][sS][tT][ ]*[tT][eE][sS][tT]|testfirst|[tT][eE][sS][tT][fF][iI][rR][sS][tT]": "This is the reply to 'first test' and 'testfirst'",
@@ -18,8 +18,8 @@ REGEX_EXPECTED = re.compile(
 
 @pytest.fixture(autouse=True)
 def change_test_dir(monkeypatch, tmp_path):
-    # create bot/data in the tmp_path
-    d = tmp_path / "bot" / "data"
+    # create slackapp/bot/data in the tmp_path
+    d = tmp_path / "slackapp" / "bot" / "data"
     d.mkdir(parents=True)
     # and copy the test files in it
     f = d / "test_messages.json"

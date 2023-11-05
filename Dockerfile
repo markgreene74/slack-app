@@ -16,7 +16,8 @@ WORKDIR /usr/src/app
 COPY --chown=slack-app:slack-app requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt --quiet
 COPY --chown=slack-app:slack-app . .
-CMD ["python", "app.py"]
+ENV PYTHONPATH "${PYTHONPATH}:/user/src/app"
+CMD ["python", "slackapp/app.py"]
 
 
 FROM base AS test
@@ -42,4 +43,5 @@ RUN pip install --no-cache-dir -r requirements-dev.txt --quiet && \
 RUN git init . && \
     pre-commit --version && \
     pre-commit install
+ENV PYTHONPATH "${PYTHONPATH}:/user/src/app"
 CMD ["/bin/bash"]

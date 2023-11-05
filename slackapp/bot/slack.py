@@ -3,10 +3,10 @@ import re
 
 from slack_bolt import App
 
-import api_interface.api_interface as api
-import bot.config as cfg
-import bot.fo76 as fo76
-from bot.messages import find_reply, regex_from_file
+import slackapp.api_interface.api_interface as api
+import slackapp.bot.config as cfg
+import slackapp.bot.fo76 as fo76
+from slackapp.bot.messages import find_reply, regex_from_file
 
 # message patterns
 pattern_fo76 = re.compile(r"[fF][oO]76|\!76|^76$")
