@@ -1,3 +1,7 @@
+## [v0.6](https://github.com/markgreene74/slack-app/releases/tag/v0.6) (2024-05-06)
+
+Default to building a `deploy` image instead of a `dev` image.
+
 ## [v0.5](https://github.com/markgreene74/slack-app/releases/tag/v0.5) (2024-05-06)
 
 Maintenance release, bump up the Python version (`3.10` -> `3.12`) and Debian base image (`bullseye` -> `bookworm`).

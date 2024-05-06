@@ -9,17 +9,6 @@ RUN mkdir -p /var/log/slack-app && \
 RUN pip install --upgrade setuptools pip
 
 
-FROM base AS deploy
-USER slack-app
-ENV PATH="${PATH}:/home/slack-app/.local/bin/"
-WORKDIR /usr/src/app
-COPY --chown=slack-app:slack-app requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt --quiet
-COPY --chown=slack-app:slack-app . .
-ENV PYTHONPATH "${PYTHONPATH}:/user/src/app"
-CMD ["python", "slackapp/app.py"]
-
-
 FROM base AS test
 USER slack-app
 ENV PATH="${PATH}:/home/slack-app/.local/bin/"
@@ -45,3 +34,14 @@ RUN git init . && \
     pre-commit install
 ENV PYTHONPATH "${PYTHONPATH}:/user/src/app"
 CMD ["/bin/bash"]
+
+
+FROM base AS deploy
+USER slack-app
+ENV PATH="${PATH}:/home/slack-app/.local/bin/"
+WORKDIR /usr/src/app
+COPY --chown=slack-app:slack-app requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt --quiet
+COPY --chown=slack-app:slack-app . .
+ENV PYTHONPATH "${PYTHONPATH}:/user/src/app"
+CMD ["python", "slackapp/app.py"]
