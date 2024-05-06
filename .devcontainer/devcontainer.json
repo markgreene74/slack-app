@@ -1,6 +1,6 @@
 {
   "name": "slack-app",
-  "image": "mcr.microsoft.com/devcontainers/python:3.12-bullseye",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
 
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
