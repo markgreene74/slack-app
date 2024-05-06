@@ -1,3 +1,7 @@
+## [v0.5](https://github.com/markgreene74/slack-app/releases/tag/v0.5) (2024-05-06)
+
+Maintenance release, bump up the Python version (`3.10` -> `3.12`) and Debian base image (`bullseye` -> `bookworm`).
+
 ## [v0.2](https://github.com/markgreene74/slack-app/releases/tag/v0.2) (2023-05-29)
 
 With this release we introduce a better system to handle messages and replies.
