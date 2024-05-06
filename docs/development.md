@@ -35,11 +35,11 @@ cd $(pyenv root)/plugins/pyenv-virtualenv && git pull && cd -
 sudo apt update && \
     sudo apt install liblzma-dev
 
-# find the latest 3.10.x version available in pyenv
-export PY_VERSION=$(pyenv install -l | grep "^\s*3.10" | tail -n 1 | awk '{print $1}') && \
+# find the latest 3.12.x version available in pyenv
+export PY_VERSION=$(pyenv install -l | grep "^\s*3.12" | tail -n 1 | awk '{print $1}') && \
     echo $PY_VERSION
 
-# install the latest 3.10.x release
+# install the latest 3.12.x release
 pyenv install $PY_VERSION
 
 # create a virtual environment
@@ -79,6 +79,11 @@ See also [the pre-commit tips section in miscellanea.md](miscellanea.md#pre-comm
 
 ## start slack-app in debug mode
 
+Export the environment variables
+```shell
+source ~/.secrets/ENV_VARS
+```
+
 Run `app.py` in debug mode
 ```shell
 export SLACK_BOT_DEBUG=true && \
@@ -103,7 +108,7 @@ It is possible to [run tests with docker](#run-the-tests-with-docker), or manual
 ```
 (slack-app-venv) (...):~/github/slack-app$ pytest
 ========================= test session starts =========================
-platform linux -- Python 3.10.11, pytest-7.3.1, pluggy-1.0.0
+platform linux -- Python 3.12.3, pytest-7.3.1, pluggy-1.0.0
 rootdir: /home/user/github/slack-app
 collected 1 item
 
