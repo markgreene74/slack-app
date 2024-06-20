@@ -4,4 +4,4 @@ idna==3.7
 requests==2.32.0
 slack-bolt==1.17.1
 slack-sdk==3.21.1
-urllib3==1.26.18
+urllib3==1.26.19
