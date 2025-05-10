@@ -35,11 +35,11 @@ cd $(pyenv root)/plugins/pyenv-virtualenv && git pull && cd -
 sudo apt update && \
     sudo apt install liblzma-dev
 
-# find the latest 3.12.x version available in pyenv
-export PY_VERSION=$(pyenv install -l | grep "^\s*3.12" | tail -n 1 | awk '{print $1}') && \
+# find the latest 3.13.x version available in pyenv
+export PY_VERSION=$(pyenv install -l | grep "^\s*3.13" | tail -n 1 | awk '{print $1}') && \
     echo $PY_VERSION
 
-# install the latest 3.12.x release
+# install the latest 3.13.x release
 pyenv install $PY_VERSION
 
 # create a virtual environment
@@ -88,14 +88,14 @@ Run `app.py` in debug mode
 ```shell
 export SLACK_BOT_DEBUG=true && \
     export PYTHONPATH=.; \
-    export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
+    export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python slackapp/app.py
 ```
 
 To switch off debug mode unset the env variable
 ```shell
 unset SLACK_BOT_DEBUG && \
     export PYTHONPATH=.; \
-    export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python app.py
+    export SLACK_BOT_TOKEN; export SLACK_APP_TOKEN; python slackapp/app.py
 ```
 
 ## tests
@@ -108,7 +108,7 @@ It is possible to [run tests with docker](#run-the-tests-with-docker), or manual
 ```
 (slack-app-venv) (...):~/github/slack-app$ pytest
 ========================= test session starts =========================
-platform linux -- Python 3.12.3, pytest-7.3.1, pluggy-1.0.0
+platform linux -- Python 3.13.3, pytest-7.3.1, pluggy-1.0.0
 rootdir: /home/user/github/slack-app
 collected 1 item
 

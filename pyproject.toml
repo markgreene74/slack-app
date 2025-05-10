@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=78.1.1"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "Slack-app"
@@ -9,7 +9,7 @@ authors = [
 ]
 description = "A simple Slack app"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
