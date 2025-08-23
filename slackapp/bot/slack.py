@@ -6,6 +6,7 @@ from slack_bolt import App
 import slackapp.api_interface.api_interface as api
 import slackapp.bot.config as cfg
 import slackapp.bot.fo76 as fo76
+import slackapp.metrics.metrics as mts
 from slackapp.bot.messages import find_reply, regex_from_file
 
 # message patterns
@@ -24,9 +25,11 @@ logger.debug("Bolt started")
 
 
 @app.message(regex_from_file("hello_messages"))
+@mts.count_replies
 def message_hello(message, say):
     logger.info(f"hello requested by user: {message['user']}")
     reply = find_reply(message["text"], "hello_messages")
+    mts.message_type(reply)
     say(f"{reply} <@{message['user']}>!")
 
 
